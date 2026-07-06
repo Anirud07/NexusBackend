@@ -19,24 +19,12 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Allowed origins for CORS mapping
-const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:5173',
-  'http://localhost:5174',
-  'http://localhost:5175',
-  'http://localhost:3000',
-];
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true,
   credentials: true,
 };
+app.use(cors(corsOptions));
 
 // Socket.io Server Setup
 const io = new Server(server, {
