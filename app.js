@@ -20,11 +20,20 @@ const app = express();
 const server = http.createServer(app);
 
 
+const allowedOrigins = [
+  "https://your-app.vercel.app",
+];
+
 const corsOptions = {
-  origin: true,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 };
-app.use(cors(corsOptions));
 
 // Socket.io Server Setup
 const io = new Server(server, {
@@ -41,7 +50,7 @@ app.set('userSockets', userSockets);
 app.use(helmet());
 
 // CORS configuration to allow credentials (cookie token)
-
+app.use(cors(corsOptions));
 
 app.use(morgan('dev'));
 app.use(express.json());
