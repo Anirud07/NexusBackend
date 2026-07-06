@@ -1,5 +1,5 @@
 import express from 'express';
-app.set('trust proxy', 1);
+
 import http from 'http';
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
@@ -18,6 +18,7 @@ import messageRoutes from './routes/messages.js';
 dotenv.config();
 
 const app = express();
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 
 
