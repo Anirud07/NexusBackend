@@ -21,7 +21,7 @@ const server = http.createServer(app);
 
 
 const allowedOrigins = [
-  "https://your-app.vercel.app",
+  "https://nexus-frontend-fawn.vercel.app/",
 ];
 
 const corsOptions = {
