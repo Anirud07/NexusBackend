@@ -42,8 +42,9 @@ export const register = async (req, res) => {
     });
 
     if (user) {
-      generateToken(res, user._id);
+      const token = generateToken(user._id);
       res.status(201).json({
+        token,
         _id: user._id,
         username: user.username,
         email: user.email,
@@ -74,8 +75,9 @@ export const login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (user && (await user.comparePassword(password))) {
-      generateToken(res, user._id);
+      const token = generateToken(user._id);
       res.json({
+        token,
         _id: user._id,
         username: user.username,
         email: user.email,
