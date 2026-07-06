@@ -1,4 +1,5 @@
 import express from 'express';
+app.set('trust proxy', 1);
 import http from 'http';
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
@@ -59,7 +60,7 @@ app.use(cookieParser());
 // Rate Limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: process.env.NODE_ENV === 'development' ? 10000 : 100, // higher limit in dev to allow polling/searching
+  max: process.env.NODE_ENV === 'development' ? 10000 : 500, // higher limit in dev to allow polling/searching
   standardHeaders: true,
   legacyHeaders: false,
   message: 'Too many requests from this IP, please try again after 15 minutes',
