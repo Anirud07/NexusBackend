@@ -41,7 +41,7 @@ app.set('userSockets', userSockets);
 app.use(helmet());
 
 // CORS configuration to allow credentials (cookie token)
-app.use(cors(corsOptions));
+
 
 app.use(morgan('dev'));
 app.use(express.json());
